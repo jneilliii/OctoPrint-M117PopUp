@@ -5,6 +5,8 @@ $(function() {
 		self.settingsViewModel = parameters[0];
 		
 		self.autoClose = ko.observable();
+		self.enableSpeech = ko.observable();
+		self.speechEnabledBrowser = ko.observable('speechSynthesis' in window);
 		self.msgType = ko.observable();
 		self.msgTypes = ko.observableArray([{
 						name : 'Notice',
@@ -35,17 +37,23 @@ $(function() {
 					type: self.settingsViewModel.settings.plugins.M117PopUp.msgType(),
 					hide: self.settingsViewModel.settings.plugins.M117PopUp.autoClose()
 					});
+				if(self.enableSpeech() && ('speechSynthesis' in window)){
+					var msg = new SpeechSynthesisUtterance(data.msg);
+					window.speechSynthesis.speak(msg);
+				}
 			}
 		}
 		
 		self.onBeforeBinding = function() {
             self.msgType(self.settingsViewModel.settings.plugins.M117PopUp.msgType());
             self.autoClose(self.settingsViewModel.settings.plugins.M117PopUp.autoClose());
+			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
         }
 		
 		self.onEventSettingsUpdated = function (payload) {            
             self.msgType = self.settingsViewModel.settings.plugins.M117PopUp.msgType();
             self.autoClose = self.settingsViewModel.settings.plugins.M117PopUp.autoClose();
+			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
         }
     }
 

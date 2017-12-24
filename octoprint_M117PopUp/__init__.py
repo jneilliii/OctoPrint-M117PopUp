@@ -18,7 +18,7 @@ class M117PopUp(octoprint.plugin.AssetPlugin,
 		
 	##-- Settings hooks
 	def get_settings_defaults(self):
-		return dict(msgType="info",autoClose=True)	
+		return dict(msgType="info",autoClose=True,enableSpeech=False)	
 	
 	##-- Template hooks
 	def get_template_configs(self):
