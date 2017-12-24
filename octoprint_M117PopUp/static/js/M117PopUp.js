@@ -8,7 +8,7 @@ $(function() {
 		self.enableSpeech = ko.observable();
 		self.speechVoice = ko.observable();
 		self.voices = ko.observableArray();
-		self.speechEnabledBrowser = ko.observable('speechSynthesis' in window);
+		self.speechEnabledBrowser = ko.observable();
 		self.msgType = ko.observable();
 		self.msgTypes = ko.observableArray([{
 						name : 'Notice',
