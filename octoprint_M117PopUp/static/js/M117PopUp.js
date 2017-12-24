@@ -41,7 +41,7 @@ $(function() {
 					});
 				if(self.enableSpeech() && ('speechSynthesis' in window)){
 					var msg = new SpeechSynthesisUtterance(data.msg);
-					msg.voice = self.speechVoice();
+					msg.voice = self.voices.filter(function(voice){return voice.name == self.speechVoice(); })[0];
 					window.speechSynthesis.speak(msg);
 				}
 			}
