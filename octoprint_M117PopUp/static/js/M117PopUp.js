@@ -65,6 +65,7 @@ $(function() {
             self.autoClose = self.settingsViewModel.settings.plugins.M117PopUp.autoClose();
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
+			self.loadVoices();
         }
 		
 		self.loadVoices = function() {
