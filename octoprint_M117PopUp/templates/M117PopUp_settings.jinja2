@@ -13,7 +13,7 @@
         </div>
     </div>
 	<div class="control-group" data-bind="visible: true">
-		<label class="control-label">{{ _('Speech') }}</label>
+		<label class="control-label">{{ _('Enable Speech') }}</label>
 		<div class="controls">
 			<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
         </div>
@@ -21,7 +21,7 @@
 	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Voice') }}</label>
 		<div class="controls">
-			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'name',value: settingsViewModel.settings.plugins.M117PopUp.speechVoice"></select>
+			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'value',value: speechVoice"></select>
         </div>
     </div>
 </form>

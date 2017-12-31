@@ -71,7 +71,7 @@ $(function() {
 			self.voices.removeAll();
 			var voicenames = speechSynthesis.getVoices();
 			voicenames.forEach(function(voice, i) {
-				self.voices.push({'name':voice.name})
+				self.voices.push({'name':voice.name,'value':voice.name})
 				});
 			}
 			
