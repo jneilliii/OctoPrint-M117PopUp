@@ -21,7 +21,7 @@
 	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Voice') }}</label>
 		<div class="controls">
-			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'value',value: speechVoice"></select>
+			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'value',value: settingsViewModel.settings.plugins.M117PopUp.speechVoice"></select>
         </div>
     </div>
 </form>
