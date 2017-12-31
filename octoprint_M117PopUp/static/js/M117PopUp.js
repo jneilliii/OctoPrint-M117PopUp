@@ -52,7 +52,7 @@ $(function() {
             self.autoClose(self.settingsViewModel.settings.plugins.M117PopUp.autoClose());
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
-			self.voices(speechSynthesis.getVoices());
+			self.loadVoices();
         }
 		
 		self.onEventSettingsUpdated = function (payload) {            
@@ -61,6 +61,20 @@ $(function() {
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
         }
+		
+		// Fetch the list of voices and populate the voice options.
+		self.loadVoices = function() {
+			// Fetch the available voices.
+			var voicenames = speechSynthesis.getVoices();			  
+			// Loop through each of the voices.
+			voicenames.forEach(function(voice, i) {
+				self.voices.push({'name':voice.name})
+				});
+			}
+			
+		window.speechSynthesis.onvoiceschanged = function(e) {
+		  self.loadVoices();
+		};
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration
