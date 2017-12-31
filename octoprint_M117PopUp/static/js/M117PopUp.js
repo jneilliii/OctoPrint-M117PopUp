@@ -67,11 +67,9 @@ $(function() {
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
         }
 		
-		// Fetch the list of voices and populate the voice options.
 		self.loadVoices = function() {
-			// Fetch the available voices.
-			var voicenames = speechSynthesis.getVoices();			  
-			// Loop through each of the voices.
+			self.voices.removeAll();
+			var voicenames = speechSynthesis.getVoices();
 			voicenames.forEach(function(voice, i) {
 				self.voices.push({'name':voice.name})
 				});
