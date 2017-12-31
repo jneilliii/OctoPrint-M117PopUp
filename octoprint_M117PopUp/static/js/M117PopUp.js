@@ -20,8 +20,11 @@ $(function() {
 						name : 'Info',
 						value : 'info'
 					}, {
-						name : 'success',
+						name : 'Success',
 						value : 'success'
+					}, {
+						name : 'Disabled',
+						value : 'disabled'
 					}
 				]);
 
@@ -33,12 +36,14 @@ $(function() {
 			
 			if(data.type == "popup") {
 				// console.log(data.msg);
-				new PNotify({
-					title: 'M117 Pop Up Message',
-					text: data.msg,
-					type: self.settingsViewModel.settings.plugins.M117PopUp.msgType(),
-					hide: self.settingsViewModel.settings.plugins.M117PopUp.autoClose()
-					});
+				if(self.settingsViewModel.settings.plugins.M117PopUp.msgType() != "disabled"){
+					new PNotify({
+						title: 'M117 Pop Up Message',
+						text: data.msg,
+						type: self.settingsViewModel.settings.plugins.M117PopUp.msgType(),
+						hide: self.settingsViewModel.settings.plugins.M117PopUp.autoClose()
+						});
+				}
 				if(self.enableSpeech() && ('speechSynthesis' in window)){
 					var msg = new SpeechSynthesisUtterance(data.msg);
 					msg.voice = speechSynthesis.getVoices().filter(function(voice){return voice.name == self.speechVoice(); })[0];
