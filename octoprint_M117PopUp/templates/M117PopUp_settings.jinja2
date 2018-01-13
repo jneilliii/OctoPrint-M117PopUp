@@ -24,7 +24,7 @@
 			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'value',value: settingsViewModel.settings.plugins.M117PopUp.speechVoice"></select>
         </div>
     </div>
-	<div class="control-group">
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Volume') }}</label>
 		<div class="controls">
 			<div class="slider slider-horizontal" style="width: 165px;">
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Pitch') }}</label>
 		<div class="controls">
 			<div class="slider slider-horizontal" style="width: 165px;">
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="control-group">
+	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Rate') }}</label>
 		<div class="controls">
 			<div class="slider slider-horizontal" style="width: 165px;">
