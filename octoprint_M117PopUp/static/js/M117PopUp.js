@@ -46,20 +46,11 @@ $(function() {
 				}
 				if(self.enableSpeech() && ('speechSynthesis' in window)){
 					var msg = new SpeechSynthesisUtterance(data.msg);
-					speechSynthesis.getVoices().filter(function(v){return v.name == self.settingsViewModel.settings.plugins.M117PopUp.speechVoice(); })[0];
-					var voice = voices.filter(function (v) {
-												return v.name == self.settingsViewModel.settings.plugins.M117PopUp.speechVoice();
-											})[0];
-					if (!voice) return;
-					msg.voice = voice;
+					msg.voice = speechSynthesis.getVoices().filter(function(voice){return voice.name == self.speechVoice(); })[0];
 					speechSynthesis.cancel();
 					speechSynthesis.speak(msg);
 				}
 			}
-		}
-		
-		self.testPopUp = function(data) {
-			self.onDataUpdaterPluginMessage("M117PopUp", {'msg':'M117 Pop up message example.','type':'popup'});
 		}
 		
 		self.onBeforeBinding = function() {
@@ -67,6 +58,7 @@ $(function() {
             self.autoClose(self.settingsViewModel.settings.plugins.M117PopUp.autoClose());
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
+			self.loadVoices();
         }
 		
 		self.onEventSettingsUpdated = function (payload) {            
@@ -74,17 +66,23 @@ $(function() {
             self.autoClose = self.settingsViewModel.settings.plugins.M117PopUp.autoClose();
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
+			self.loadVoices();
         }
+		
+		self.testPopUp = function(data) {
+			self.onDataUpdaterPluginMessage("M117PopUp", {'msg':'M117 Pop up message example.','type':'popup'});
+		}
+		
+		self.loadVoices = function() {
+			self.voices.removeAll();
+			var voicenames = speechSynthesis.getVoices();
+			voicenames.forEach(function(voice, i) {
+				self.voices.push({'name':voice.name,'value':voice.name})
+				});
+			}
 			
-		speechSynthesis.onvoiceschanged = function () {
-			if (self.voices().length > 0)
-				return;
-			var voices;
-			voices = speechSynthesis.getVoices();
-
-			voices.forEach(function (voice, i) {
-				self.voices.push({'name':voice.name,'value':voice.name});
-			});
+		speechSynthesis.onvoiceschanged = function(e) {
+		  self.loadVoices();
 		};
     }
 
