@@ -54,7 +54,8 @@
 					<div class="tooltip-arrow"></div>
 					<div class="tooltip-inner">100</div>
 				</div>
-				<input type="number" style="width: 153px; display: none;" data-bind="slider: {min: 0, max: 2, step: .1, value: settingsViewModel.settings.plugins.M117PopUp.speechPitch, tooltip: 'hide'}">
+				<input type="number" style="width: 153px; display: none;" data-bind="slider: {min: 0, max: 2, step: .1, value: settingsViewModel.settings.plugins.M117PopUp.speechPitch, tooltip: 'show'}">
+				<span data-bind="text: settingsViewModel.settings.plugins.M117PopUp.speechPitch"></span>
 			</div>
 		</div>
 	</div>
