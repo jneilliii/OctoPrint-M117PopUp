@@ -78,7 +78,6 @@ $(function() {
 			voicenames.forEach(function(voice, i) {
 				self.voices.push({'name':voice.name,'value':voice.name})
 				});
-			}
 		};
     }
 
