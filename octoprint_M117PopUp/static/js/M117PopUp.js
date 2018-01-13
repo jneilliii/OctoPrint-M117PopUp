@@ -74,7 +74,6 @@ $(function() {
 		}
 		
 		self.loadVoices = function() {
-			self.voices.removeAll();
 			var voicenames = speechSynthesis.getVoices();
 			voicenames.forEach(function(voice, i) {
 				self.voices.push({'name':voice.name,'value':voice.name})
@@ -82,7 +81,9 @@ $(function() {
 			}
 			
 		speechSynthesis.onvoiceschanged = function(e) {
-		  self.loadVoices();
+			if (self.voices().length > 0)
+				return;
+			self.loadVoices();
 		};
     }
 
