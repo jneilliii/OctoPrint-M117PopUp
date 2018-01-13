@@ -46,7 +46,7 @@ $(function() {
 				}
 				if(self.enableSpeech() && ('speechSynthesis' in window)){
 					var msg = new SpeechSynthesisUtterance(data.msg);
-					msg.voice = speechSynthesis.getVoices().filter(function(voice){return voice.name == self.speechVoice(); })[0];
+					msg.voice = speechSynthesis.getVoices().filter(function(voice){return voice.name == self.settingsViewModel.settings.plugins.M117PopUp.speechVoice(); })[0];
 					speechSynthesis.cancel();
 					speechSynthesis.speak(msg);
 				}
