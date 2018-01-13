@@ -58,7 +58,6 @@ $(function() {
             self.autoClose(self.settingsViewModel.settings.plugins.M117PopUp.autoClose());
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
-			self.loadVoices();
         }
 		
 		self.onEventSettingsUpdated = function (payload) {            
@@ -66,24 +65,20 @@ $(function() {
             self.autoClose = self.settingsViewModel.settings.plugins.M117PopUp.autoClose();
 			self.enableSpeech(self.settingsViewModel.settings.plugins.M117PopUp.enableSpeech());
 			self.speechVoice(self.settingsViewModel.settings.plugins.M117PopUp.speechVoice());
-			self.loadVoices();
         }
 		
 		self.testPopUp = function(data) {
 			self.onDataUpdaterPluginMessage("M117PopUp", {'msg':'M117 Pop up message example.','type':'popup'});
 		}
-		
-		self.loadVoices = function() {
+			
+		speechSynthesis.onvoiceschanged = function(e) {
+			if (self.voices().length > 0)
+				return;
 			var voicenames = speechSynthesis.getVoices();
 			voicenames.forEach(function(voice, i) {
 				self.voices.push({'name':voice.name,'value':voice.name})
 				});
 			}
-			
-		speechSynthesis.onvoiceschanged = function(e) {
-			if (self.voices().length > 0)
-				return;
-			self.loadVoices();
 		};
     }
 
