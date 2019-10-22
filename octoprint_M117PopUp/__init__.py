@@ -46,6 +46,7 @@ class M117PopUp(octoprint.plugin.AssetPlugin,
 		)
 
 __plugin_name__ = "M117PopUp"
+__plugin_pythoncompat__ = ">=2.7,<4"
 
 def __plugin_load__():
 	global __plugin_implementation__
