@@ -4,26 +4,33 @@
 		<label class="control-label">{{ _('Message Type') }}</label>
 		<div class="controls">
 			<select data-bind="options: msgTypes,optionsText: 'name',optionsValue: 'value',value: settingsViewModel.settings.plugins.M117PopUp.msgType"></select>
-        </div>
-    </div>
+		</div>
+	</div>
 	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.msgType() != 'disabled'">
 		<label class="control-label">{{ _('Auto Close') }}</label>
 		<div class="controls">
 			<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.M117PopUp.autoClose,enabled: settingsViewModel.settings.plugins.M117PopUp.msgType() != 'disabled'">
-        </div>
-    </div>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{ _('Exclude RegEx') }}</label>
+		<div class="controls">
+			<input type="text" data-bind="value: settingsViewModel.settings.plugins.M117PopUp.regex_exclude"/>
+			<span class="help-inline">The regular expression is compared against the text after M117 using python's re.search so if the pattern is found anywhere in the message it will be excluded. Multiple patterns should be able to be achieved using | in the regular expression for example (LAYERINDICATOR|IGNOREME) would match LAYERINDICATOR or IGNOREME and not pop up those messages.</span>
+		</div>
+	</div>
 	<div class="control-group" data-bind="visible: true">
 		<label class="control-label">{{ _('Enable Speech') }}</label>
 		<div class="controls">
 			<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
-        </div>
-    </div>
+		</div>
+	</div>
 	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Voice') }}</label>
 		<div class="controls">
 			<select data-bind="options: voices,optionsText: 'name',optionsValue: 'value',value: settingsViewModel.settings.plugins.M117PopUp.speechVoice"></select>
-        </div>
-    </div>
+		</div>
+	</div>
 	<div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.M117PopUp.enableSpeech">
 		<label class="control-label">{{ _('Volume') }}</label>
 		<div class="controls">
@@ -81,6 +88,6 @@
 	<div class="control-group">
 		<div class="controls">
 			<button class="btn btn-primary" data-bind="click: testPopUp">Test</button>
-        </div>
-    </div>
+		</div>
+	</div>
 </form>

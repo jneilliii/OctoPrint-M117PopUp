@@ -5,29 +5,33 @@ import re
 
 class M117PopUp(octoprint.plugin.AssetPlugin,
 				octoprint.plugin.TemplatePlugin,
-                octoprint.plugin.SettingsPlugin):
-				
+				octoprint.plugin.SettingsPlugin):
+
 	def AlertM117(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
 		if gcode and cmd.startswith("M117"):
-			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
-			return
-	
+			popup_message = re.sub(r'^M117\s?', '', cmd)
+			if len(self._settings.get(["regex_exclude"])) > 0 and re.search(self._settings.get(["regex_exclude"]), popup_message) is not None:
+				return
+			else:
+				self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=popup_message))
+				return
+
 	##-- AssetPlugin hooks
 	def get_assets(self):
 		return dict(js=["js/M117PopUp.js"])
-		
+
 	##-- Settings hooks
 	def get_settings_defaults(self):
-		return dict(msgType="info",autoClose=True,enableSpeech=False,speechVoice="",speechVolume=1,speechPitch=1,speechRate=1)	
-	
+		return dict(msgType="info",autoClose=True,enableSpeech=False,speechVoice="",speechVolume=1,speechPitch=1,speechRate=1,regex_exclude="")
+
 	##-- Template hooks
 	def get_template_configs(self):
 		return [dict(type="settings",custom_bindings=True)]
-		
+
 	##~~ Softwareupdate hook
 	def get_version(self):
 		return self._plugin_version
-		
+
 	def get_update_information(self):
 		return dict(
 			m117popup=dict(
@@ -54,6 +58,6 @@ def __plugin_load__():
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
-		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117,
+		"octoprint.comm.protocol.gcode.sent": __plugin_implementation__.AlertM117,
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
