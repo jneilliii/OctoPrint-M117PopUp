@@ -42,7 +42,9 @@ $(function() {
 				if(self.settingsViewModel.settings.plugins.M117PopUp.msgType() != "disabled"){
 					new PNotify({
 						title: 'M117 Pop Up Message',
+						title_escape: true,
 						text: data.msg,
+						text_escape: true,
 						type: self.settingsViewModel.settings.plugins.M117PopUp.msgType(),
 						hide: self.settingsViewModel.settings.plugins.M117PopUp.autoClose()
 						});
