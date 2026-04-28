@@ -1,2 +1,5 @@
 include README.md
 include requirements.txt
+recursive-include octoprint_M117PopUp/templates *
+recursive-include octoprint_M117PopUp/translations *
+recursive-include octoprint_M117PopUp/static *

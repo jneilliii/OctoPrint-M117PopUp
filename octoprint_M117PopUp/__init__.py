@@ -28,6 +28,9 @@ class M117PopUp(octoprint.plugin.AssetPlugin,
 	def get_template_configs(self):
 		return [dict(type="settings",custom_bindings=True)]
 
+	def is_template_autoescaped(self):
+		return True
+
 	##~~ Softwareupdate hook
 	def get_version(self):
 		return self._plugin_version
